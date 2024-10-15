@@ -62,11 +62,10 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // Check if the game is in Main Menu state
-        // if (gameManager.currentState == GameState.MainMenu)
-        // {
-        //     // Don't allow player movement in Main Menu
-        //     return;
-        // }
+        if (gameManager.currentState ==  GameManager.GameState.MainMenu)
+        {
+            return; // Exit the method if in Main Menu state
+        }
 
         // Check if ground is below player -> Raycast half the players height down, see if it hits ground 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround); 
@@ -89,6 +88,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() 
     {
+        // Check if the game is in Main Menu state
+    if (gameManager.currentState == GameManager.GameState.MainMenu)
+    {
+        // Don't allow player movement in Main Menu
+        return;  // Exit the method if in Main Menu state
+    }
         MovePlayer();    
     }
 

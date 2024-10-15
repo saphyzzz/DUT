@@ -487,7 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensX: 600
   sensY: 600
-  orientation: {fileID: 1854625740}
+  orientation: {fileID: 548867266}
 --- !u!114 &867194417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,6 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08af06aa61c301241afa47346fc51b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
 --- !u!1 &1275628362
 GameObject:
   m_ObjectHideFlags: 0

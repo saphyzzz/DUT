@@ -6,10 +6,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     // Game States
-    enum GameState{MainMenu, InGame, WinScreen, DefeatScreen}
+    public enum GameState{MainMenu, InGame, WinScreen, DefeatScreen}
 
     // Stores the current Game state
-    GameState currentState = GameState.MainMenu; 
+    public GameState currentState = GameState.MainMenu; 
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     {
         // Execute this code if our game state is in main menu 
         if (currentState == GameState.MainMenu) {
-            if (Input.GetKeyDown(KeyCode.Keypad1)){
-                Debug.Log(" We are now in the: " + currentState + " Press 1 to leave.");
+            if (Input.GetKeyDown(KeyCode.Keypad2)){
+                Debug.Log(" We are now in the: " + currentState + " Press 2 to leave.");
             }
             currentState = GameState.InGame; 
         }
