@@ -25,14 +25,14 @@ public class GameManager : MonoBehaviour
     {
         // Execute this code if our game state is in main menu 
         if (currentState == GameState.MainMenu) {
-            if (Input.GetKeyDown(KeyCode.Keypad1)){
+            if (Input.GetKeyDown(KeyCode.Alpha1)){
                 currentState = GameState.InGame; 
                 Debug.Log(" We are now in the: " + currentState);
             }
         }
 
         if (currentState == GameState.InGame){
-            if (Input.GetKeyDown(KeyCode.Keypad2)){
+            if (Input.GetKeyDown(KeyCode.Alpha2)){
                 currentState = GameState.MainMenu; 
                 Debug.Log("We are now in " + currentState);
             }
