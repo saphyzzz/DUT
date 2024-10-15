@@ -1,3 +1,5 @@
+// Avalon Brathwaite 
+
 // Make camera always move with player 
 
 using System.Collections;
