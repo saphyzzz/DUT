@@ -15,15 +15,6 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed; 
     public float sprintSpeed;
 
-    // Handle states of movement 
-    private MovementState state;
-    public enum MovementState
-    {
-        walking,
-        sprinting,
-        air
-    }
-
     // Handle ground speed 
     [Header("Ground Check")]
     public float playerHeight; 
@@ -67,64 +58,60 @@ public class PlayerMovement : MonoBehaviour
             return; // Exit the method if in Main Menu state
         }
 
-        // Check if ground is below player -> Raycast half the players height down, see if it hits ground 
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround); 
-
-        myInput(); 
-        SpeedControl(); 
-        StateHandler(); 
-
-        // Handle drag 
-        if(grounded)
+        else if (gameManager.currentState == GameManager.GameState.InGame)
         {
-            rb.drag = groundDrag; 
-        }
-        else
-        {
-            rb.drag = 0; 
-        }
+            // Check if ground is below player -> Raycast half the players height down, see if it hits ground 
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround); 
 
+            MyInput(); 
+            SpeedControl(); 
+            StateHandler(); 
+
+            // Handle drag 
+            if(grounded)
+            {
+                rb.drag = groundDrag; 
+            }
+            else
+            {
+                rb.drag = 0; 
+            }
+        }
     }
 
     private void FixedUpdate() 
     {
         // Check if the game is in Main Menu state
-    if (gameManager.currentState == GameManager.GameState.MainMenu)
-    {
-        // Don't allow player movement in Main Menu
-        return;  // Exit the method if in Main Menu state
+        if (gameManager.currentState == GameManager.GameState.MainMenu)
+        {
+            // Don't allow player movement in Main Menu
+            return;  // Exit the method if in Main Menu state
+        }
+        else if (gameManager.currentState == GameManager.GameState.InGame)
+        {
+            MovePlayer();    
+        }
     }
-        MovePlayer();    
-    }
-
     // Gets user input 
-    private void myInput()
+    private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
     }
 
+    // Control movement speed based on if a player is walking or sprinting 
     private void StateHandler()
     {
         // Mode - Sprinting
         if(grounded && Input.GetKey(sprintKey))
         {
-            state = MovementState.sprinting; 
             moveSpeed = sprintSpeed; 
         }
 
         // Mode - Walking 
         else if(grounded)
         {
-            state = MovementState.walking; 
             moveSpeed = walkSpeed; 
-        }
-
-        // Mode - Air 
-        else
-        {
-            state = MovementState.air;
-
         }
     }
 
@@ -133,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
     {
         // Calculate movement direction - This way player will always walk in the direction they are looking in 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput; 
-        rb.AddForce (moveDirection.normalized * moveSpeed * 10f, ForceMode.Force); 
 
         // Player on slope 
         if (OnSlope())

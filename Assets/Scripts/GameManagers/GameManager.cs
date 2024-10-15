@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Debug.Log("We are in gamestate: "+ currentState);
+        Debug.Log("Press 1 to leave main menu, press 2 to go from InGame to main menu");
     }
 
     // Update is called once per frame
@@ -22,17 +23,17 @@ public class GameManager : MonoBehaviour
     {
         // Execute this code if our game state is in main menu 
         if (currentState == GameState.MainMenu) {
-            if (Input.GetKeyDown(KeyCode.Keypad2)){
-                Debug.Log(" We are now in the: " + currentState + " Press 2 to leave.");
+            if (Input.GetKeyDown(KeyCode.Keypad1)){
+                currentState = GameState.InGame; 
+                Debug.Log(" We are now in the: " + currentState);
             }
-            currentState = GameState.InGame; 
         }
 
-        else if (currentState == GameState.InGame){
-            if (Input.GetKeyDown(KeyCode.Keypad1)){
-                 Debug.Log("We are now in " + currentState + " Press 1 to leave. ");
+        if (currentState == GameState.InGame){
+            if (Input.GetKeyDown(KeyCode.Keypad2)){
+                currentState = GameState.MainMenu; 
+                Debug.Log("We are now in " + currentState);
             }
-            currentState = GameState.MainMenu; 
         }
     }
 }
