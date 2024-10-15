@@ -9,16 +9,37 @@ public class PlayerMovement : MonoBehaviour
     
     // Handle movement speed
     [Header("Movement")]
-    public float moveSpeed;
+    private float moveSpeed;
     public float groundDrag; 
     Vector3 moveDirection; 
+    public float walkSpeed; 
+    public float sprintSpeed;
+
+    // Handle states of movement 
+    private MovementState state;
+    public enum MovementState
+    {
+        walking,
+        sprinting,
+        air
+    }
 
     // Handle ground speed 
     [Header("Ground Check")]
     public float playerHeight; 
     public LayerMask whatIsGround; 
     bool grounded; 
+    
+    // Handle slopes 
+    [Header("Slope Handling")]
+    public float maxSlopeAngle; 
+    private RaycastHit slopeHit; 
+    public float airMultiplier;
 
+
+    [Header("Keybinds")]
+    public KeyCode sprintKey = KeyCode.LeftShift; 
+    
     // Oritentation of player 
     public Transform orientation; 
 
@@ -28,15 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
     // Handle States 
     public GameManager gameManager;  
-    
-    // Handles jumping of player 
-    public float jumpForce; 
-    public float jupmpCooldown; 
-    public float airMultiplier; 
-    bool readyToJump;   
-
-    [Header("Keybinds")]
-    public KeyCode jumpkey = KeyCode.Space; 
     Rigidbody rb; 
 
     public void Start()
@@ -44,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         // Get rigid body 
         rb = GetComponent<Rigidbody>(); 
         rb.freezeRotation = true; 
-        readyToJump = true;
     }
 
     public void Update()
@@ -56,8 +67,13 @@ public class PlayerMovement : MonoBehaviour
         //     // Don't allow player movement in Main Menu
         //     return;
         // }
+
         // Check if ground is below player -> Raycast half the players height down, see if it hits ground 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround); 
+
+        myInput(); 
+        SpeedControl(); 
+        StateHandler(); 
 
         // Handle drag 
         if(grounded)
@@ -69,9 +85,6 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 0; 
         }
 
-        // Check for new input each update 
-        myInput(); 
-        SpeedControl(); 
     }
 
     private void FixedUpdate() 
@@ -84,14 +97,29 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+    }
 
-        // When player jumps 
-        if(Input.GetKey(jumpkey) && readyToJump && grounded)
+    private void StateHandler()
+    {
+        // Mode - Sprinting
+        if(grounded && Input.GetKey(sprintKey))
         {
-            readyToJump = false; 
+            state = MovementState.sprinting; 
+            moveSpeed = sprintSpeed; 
+        }
 
-            Jump(); 
-            Invoke(nameof(ResetJump), jupmpCooldown); 
+        // Mode - Walking 
+        else if(grounded)
+        {
+            state = MovementState.walking; 
+            moveSpeed = walkSpeed; 
+        }
+
+        // Mode - Air 
+        else
+        {
+            state = MovementState.air;
+
         }
     }
 
@@ -100,45 +128,72 @@ public class PlayerMovement : MonoBehaviour
     {
         // Calculate movement direction - This way player will always walk in the direction they are looking in 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput; 
+        rb.AddForce (moveDirection.normalized * moveSpeed * 10f, ForceMode.Force); 
 
-        // On ground 
-        if(grounded)
+        // Player on slope 
+        if (OnSlope())
         {
-            rb.AddForce (moveDirection.normalized * moveSpeed * 10f, ForceMode.Force); 
+            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+
+            if (rb.velocity.y > 0) // If player is moving upwards, add downwards force 
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
 
-        // In air 
-        else if(!grounded) 
-        {
-            rb.AddForce (moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force); 
-        }
-    }
+        // On ground
+        else if(grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        // In air
+        else if(!grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+
+        // Turn gravity off while on slope
+        rb.useGravity = !OnSlope();
+   }
 
     // Handle how fast a player can go
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        // Limiting speed on slope 
+        if(OnSlope())
+        {
+            if(rb.velocity.magnitude > moveSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * moveSpeed; 
+            }
+        }
 
-        /* Limit velocity if needed, if player goes faster than movement speed, calculate what the movement speed 
-           would be then apply it */ 
-        if(flatVel.magnitude > moveSpeed){
-            Vector3 limitedVel = flatVel.normalized * moveSpeed; // Returns a new vector in the same direction as flatVel but with a length of 1, 
-                                                                 // multipling by moveSpeed gets same speed of moveSpeed 
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.y); 
+        // Limiting speed on ground or in air 
+        else
+        {
+            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            /* Limit velocity if needed, if player goes faster than movement speed, calculate what the movement speed 
+            would be then apply it */ 
+            if(flatVel.magnitude > moveSpeed){
+                Vector3 limitedVel = flatVel.normalized * moveSpeed; // Returns a new vector in the same direction as flatVel but with a length of 1, 
+                                                                    // multipling by moveSpeed gets same speed of moveSpeed 
+                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z); 
+            }
         }
     }
 
-    // Handle jumping of a player 
-    private void Jump()
+    // Handle player on slopes 
+    private bool OnSlope()
     {
-        // Reset the y velocity to allow same jump height each time 
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); 
+        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) // slopeHit stores object that player has hit 
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal); 
+            return angle < maxSlopeAngle && angle != 0; 
+        }
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse); // Impulse as we are only applying the force once 
+        return false; 
     }
 
-    private void ResetJump()
+    // Projecting slopHit onto the slope below player 
+    private Vector3 GetSlopeMoveDirection()
     {
-        readyToJump = true; 
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
+
 }
