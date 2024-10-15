@@ -11,10 +11,6 @@ public class GameManager : MonoBehaviour
     // Stores the current Game state
     GameState currentState = GameState.MainMenu; 
 
-    // Store user input 
-    string playersInput = ""; 
-
-
     // Start is called before the first frame update
     void Start()
     {
