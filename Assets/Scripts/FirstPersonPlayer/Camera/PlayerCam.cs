@@ -35,7 +35,7 @@ public class PlayerCam : MonoBehaviour
     {
         
          // Check if the game is in Main Menu state
-        if (gameManager.currentState ==  GameManager.GameState.MainMenu)
+        if (gameManager.currentState ==  GameManager.GameState.PauseMenu)
         {
             return; // Exit the method if in Main Menu state
         }

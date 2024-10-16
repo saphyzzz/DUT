@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // Check if the game is in Main Menu state
-        if (gameManager.currentState ==  GameManager.GameState.MainMenu)
+        if (gameManager.currentState ==  GameManager.GameState.PauseMenu)
         {
             return; // Exit the method if in Main Menu state
         }
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate() 
     {
         // Check if the game is in Main Menu state
-        if (gameManager.currentState == GameManager.GameState.MainMenu)
+        if (gameManager.currentState == GameManager.GameState.PauseMenu)
         {
             // Don't allow player movement in Main Menu
             return;  // Exit the method if in Main Menu state
