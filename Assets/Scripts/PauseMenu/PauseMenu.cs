@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
-
 
 public class PauseMenu : MonoBehaviour
 {
@@ -19,15 +19,16 @@ public class PauseMenu : MonoBehaviour
          // Check if the game is in pause menu state
         if (gameManager.currentState !=  GameManager.GameState.PauseMenu)
         {
+            // PUT RESUME HERE IN FUTURE WHEN DEBUG MESSAGE IS GONE
             pixelRenderUI.SetActive(true); 
             pauseMenuUI.SetActive(false); 
+            Time.timeScale = 1;
             return; // Exit the method if in Main Menu state
         }
 
         else if (gameManager.currentState == GameManager.GameState.PauseMenu)
         {   
-            pixelRenderUI.SetActive(false);
-            pauseMenuUI.SetActive(true);
+            pause(); 
         }
     }
 
@@ -35,6 +36,7 @@ public class PauseMenu : MonoBehaviour
     public void pause()
     {
         pauseMenuUI.SetActive(true);
+        pixelRenderUI.SetActive(false);
         Time.timeScale = 0; 
     }
 
@@ -42,7 +44,10 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         Debug.Log("Back to in game");
+        pixelRenderUI.SetActive(true); 
+        pauseMenuUI.SetActive(false); 
         gameManager.currentState = GameManager.GameState.InGame; 
+        Time.timeScale = 1;
     }
 
     // Load the main menu 

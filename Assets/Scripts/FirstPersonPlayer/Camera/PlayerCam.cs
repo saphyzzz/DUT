@@ -36,7 +36,7 @@ public class PlayerCam : MonoBehaviour
         if (gameManager.currentState ==  GameManager.GameState.PauseMenu)
         {
          // Lock cursor to the middle of the screen and make it visible 
-             Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;; 
             return; // Exit the method if in pause menu
         }
