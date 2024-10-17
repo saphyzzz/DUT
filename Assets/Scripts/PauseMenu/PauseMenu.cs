@@ -42,10 +42,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         Debug.Log("Back to in game");
-        pauseMenuUI.SetActive(false); 
-        pixelRenderUI.SetActive(true);
         gameManager.currentState = GameManager.GameState.InGame; 
-        Time.timeScale = 1; 
     }
 
     // Load the main menu 
@@ -54,6 +51,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Loading Menu");
     }
 
+    
     // Go into settings 
     public void LoadSettings()
     {

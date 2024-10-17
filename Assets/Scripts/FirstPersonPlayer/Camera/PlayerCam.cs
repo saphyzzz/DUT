@@ -25,9 +25,7 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Lock cursor to the middle of the screen and make it invisible 
-        Cursor.lockState = CursorLockMode.Locked; 
-        Cursor.visible = false; 
+        
     }
 
     // Update is called once per frame
@@ -37,11 +35,19 @@ public class PlayerCam : MonoBehaviour
          // Check if the game is in pause menu
         if (gameManager.currentState ==  GameManager.GameState.PauseMenu)
         {
+         // Lock cursor to the middle of the screen and make it visible 
+             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;; 
             return; // Exit the method if in pause menu
         }
 
         else if (gameManager.currentState == GameManager.GameState.InGame)
         {
+
+            // Lock cursor to the middle of the screen and make it invisible 
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false; 
+            
             // Get the horizontal mouse movement 
             float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
             
