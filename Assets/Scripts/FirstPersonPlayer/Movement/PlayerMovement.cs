@@ -54,10 +54,10 @@ public class PlayerMovement : MonoBehaviour
     public void Update()
     {
 
-        // Check if the game is in Main Menu state
+        // Check if the game is in pause menu state
         if (gameManager.currentState ==  GameManager.GameState.PauseMenu)
         {
-            return; // Exit the method if in Main Menu state
+            return; // Exit the method if in pause menu state
         }
 
         else if (gameManager.currentState == GameManager.GameState.InGame)
