@@ -8479,6 +8479,7 @@ GameObject:
   - component: {fileID: 4083501150233993619}
   - component: {fileID: 3260616447549588414}
   - component: {fileID: 7762067043709278767}
+  - component: {fileID: 8707273951859423279}
   m_Layer: 0
   m_Name: Screen
   m_TagString: Untagged
@@ -8486,6 +8487,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8707273951859423279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707273951859423278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225cb575ea01c274b8f7977032182b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultFace: {fileID: 2100000, guid: 6b23b3405d16a294288cef7ebf17d02a, type: 2}
+  redFace: {fileID: 2100000, guid: 07db819bf1be89b4fa0f6b3417225e45, type: 2}
 --- !u!1 &8752070450327387157
 GameObject:
   m_ObjectHideFlags: 0
