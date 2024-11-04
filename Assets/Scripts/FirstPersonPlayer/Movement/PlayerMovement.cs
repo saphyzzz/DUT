@@ -53,46 +53,27 @@ public class PlayerMovement : MonoBehaviour
 
     public void Update()
     {
+        // Check if ground is below player -> Raycast half the players height down, see if it hits ground 
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround); 
 
-        // Check if the game is in pause menu state
-        if (gameManager.currentState ==  GameManager.GameState.PauseMenu)
+        MyInput(); 
+        SpeedControl(); 
+        StateHandler(); 
+
+        // Handle drag 
+        if(grounded)
         {
-            return; // Exit the method if in pause menu state
+            rb.drag = groundDrag; 
         }
-
-        else if (gameManager.currentState == GameManager.GameState.InGame)
+        else
         {
-            // Check if ground is below player -> Raycast half the players height down, see if it hits ground 
-            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround); 
-
-            MyInput(); 
-            SpeedControl(); 
-            StateHandler(); 
-
-            // Handle drag 
-            if(grounded)
-            {
-                rb.drag = groundDrag; 
-            }
-            else
-            {
-                rb.drag = 0; 
-            }
+            rb.drag = 0; 
         }
     }
 
     private void FixedUpdate() 
     {
-        // Check if the game is in Main Menu state
-        if (gameManager.currentState == GameManager.GameState.PauseMenu)
-        {
-            // Don't allow player movement in Main Menu
-            return;  // Exit the method if in Main Menu state
-        }
-        else if (gameManager.currentState == GameManager.GameState.InGame)
-        {
-            MovePlayer();    
-        }
+        MovePlayer();    
     }
     // Gets user input 
     private void MyInput()
