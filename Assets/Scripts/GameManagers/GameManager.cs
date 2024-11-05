@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
     // Game States
@@ -17,24 +18,24 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Debug.Log("We are in gamestate: "+ currentState);
-        Debug.Log("Press 1 to leave Pause menu, press 2 to go from InGame to Pause menu");
+        Debug.Log("Press esc to pause");
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Execute this code if our game state is in pause menu 
-        if (currentState == GameState.PauseMenu) {
-            if (Input.GetKeyDown(KeyCode.Alpha1)){
-                currentState = GameState.InGame; 
-                Debug.Log(" We are now in the: " + currentState);
-            }
-        }
-
         if (currentState == GameState.InGame){
-            if (Input.GetKeyDown(KeyCode.Alpha2)){
+            if (Input.GetKeyDown(KeyCode.Escape)){
                 currentState = GameState.PauseMenu; 
                 Debug.Log("We are now in " + currentState);
+                Time.timeScale = 1; 
+            }
+        }
+        else if(currentState == GameState.PauseMenu){
+            if (Input.GetKeyDown(KeyCode.Escape)){
+                currentState = GameState.InGame; 
+                Debug.Log("We are now in " + currentState);
+                Time.timeScale = 0; 
             }
         }
     }

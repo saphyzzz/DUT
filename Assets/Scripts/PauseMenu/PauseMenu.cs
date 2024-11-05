@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,8 +13,11 @@ public class PauseMenu : MonoBehaviour
 
     // UI
     public GameObject pauseMenuUI; 
-    public GameObject pixelRenderUI; 
+    public GameObject pixelRenderUI;
 
+    void Start()
+    {
+    }
     // Update is called once per frame
     void Update()
     {
@@ -53,14 +58,7 @@ public class PauseMenu : MonoBehaviour
     // Load the main menu 
     public void LoadMenu()
     {
+        SceneManager.LoadScene("MainMenu");
         Debug.Log("Loading Menu");
-    }
-
-    
-    // Go into settings 
-    public void LoadSettings()
-    {
-        
-        Debug.Log("Loading settings");
     }
 }
