@@ -13,20 +13,16 @@ public class PauseMenu : MonoBehaviour
 
     // UI
     public GameObject pauseMenuUI; 
-    public GameObject pixelRenderUI; 
-    public GameObject settingsMenuUI; 
-    private Boolean inSettings; 
-
+    public GameObject pixelRenderUI;
 
     void Start()
     {
-        inSettings = false; 
     }
     // Update is called once per frame
     void Update()
     {
          // Check if the game is in pause menu state
-        if (gameManager.currentState !=  GameManager.GameState.PauseMenu && inSettings == false)
+        if (gameManager.currentState !=  GameManager.GameState.PauseMenu)
         {
             // PUT RESUME HERE IN FUTURE WHEN DEBUG MESSAGE IS GONE
             pixelRenderUI.SetActive(true); 
@@ -62,27 +58,7 @@ public class PauseMenu : MonoBehaviour
     // Load the main menu 
     public void LoadMenu()
     {
-        SceneManager.LoadScene (sceneName:"MainMenu");
+        SceneManager.LoadScene("MainMenu");
         Debug.Log("Loading Menu");
-    }
-
-    
-    // Go into settings 
-    public void LoadSettings()
-    {
-        inSettings = true; 
-        pauseMenuUI.SetActive(false);
-        settingsMenuUI.SetActive(true);
-        pixelRenderUI.SetActive(false); 
-        Debug.Log("Loading settings");
-    }
-
-    // Go back from settings
-    public void LeaveSettings()
-    {
-        inSettings = false;
-        settingsMenuUI.SetActive(false);
-        pauseMenuUI.SetActive(true);
-
     }
 }

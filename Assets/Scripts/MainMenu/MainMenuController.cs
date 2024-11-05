@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class MainMenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         dark.gameObject.SetActive(false);
         StartCoroutine(ChangeImage());
         StartCoroutine(FlashScreenExtra());
@@ -29,7 +31,6 @@ public class MainMenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private IEnumerator ChangeImage()
@@ -118,4 +119,18 @@ public class MainMenuController : MonoBehaviour
             yield return new WaitForSeconds(extraFaceFlash);
         }
     }
+
+    // Quit game 
+    public void QuitButton()
+    {
+        Application.Quit();
+        Debug.Log("Game closed"); 
+    }
+
+    // Play game S
+    public void Play()
+    {
+        SceneManager.LoadScene("FirstScene");
+    }
+
 }

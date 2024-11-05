@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         Debug.Log("We are in gamestate: "+ currentState);
         Debug.Log("Press esc to pause");
     }
@@ -29,6 +30,13 @@ public class GameManager : MonoBehaviour
                 currentState = GameState.PauseMenu; 
                 Debug.Log("We are now in " + currentState);
                 Time.timeScale = 1; 
+            }
+        }
+        else if(currentState == GameState.PauseMenu){
+            if (Input.GetKeyDown(KeyCode.Escape)){
+                currentState = GameState.InGame; 
+                Debug.Log("We are now in " + currentState);
+                Time.timeScale = 0; 
             }
         }
     }
