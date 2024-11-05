@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         Debug.Log("We are in gamestate: "+ currentState);
         Debug.Log("Press esc to pause");
     }
