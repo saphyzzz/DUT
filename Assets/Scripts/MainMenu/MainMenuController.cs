@@ -90,7 +90,7 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
-    private IEnumerator FlashRedFace()
+     private IEnumerator FlashRedFace()
     {
         for (int i = 0; i < 2; i++)
         {
