@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     // Stores the current Game state
     public GameState currentState = GameState.InGame; 
+
+    public GameObject winUI;
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +34,23 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1; 
             }
         }
+
         else if(currentState == GameState.PauseMenu){
             if (Input.GetKeyDown(KeyCode.Escape)){
                 currentState = GameState.InGame; 
                 Debug.Log("We are now in " + currentState);
                 Time.timeScale = 0; 
+            }
+        }
+
+        else if(currentState == GameState.WinScreen){
+            winUI.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Escape)){
+                SceneManager.LoadScene("MainMenu");
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                Debug.Log("Loading Menu");
+                Time.timeScale = 1; 
             }
         }
     }

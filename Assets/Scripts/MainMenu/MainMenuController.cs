@@ -127,7 +127,7 @@ public class MainMenuController : MonoBehaviour
         Debug.Log("Game closed"); 
     }
 
-    // Play game S
+    // Play game 
     public void Play()
     {
         SceneManager.LoadScene("FirstScene");

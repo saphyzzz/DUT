@@ -37,7 +37,7 @@ public class PlayerCam : MonoBehaviour
         {
          // Lock cursor to the middle of the screen and make it visible 
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;; 
+            Cursor.visible = true;
             return; // Exit the method if in pause menu
         }
 

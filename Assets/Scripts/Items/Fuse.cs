@@ -12,23 +12,30 @@ public class Fuse : MonoBehaviour
     private bool isPlayerInRange;
     public GameObject itemUI; 
     public Text uiText; 
+    public GameManager gameManager; 
 
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
+        
+        gameManager = FindObjectOfType<GameManager>();
     }
 
    
    void Update()
       {
+         if(gameManager.currentState != GameManager.GameState.InGame){
+         itemUI.SetActive(false);
+         return;
+      }
          // Check if the player is in range and has pressed "E"
          if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
          {
             if(player.hasFuse == false){
                uiText.text = "Pick up fuse";
                // Increment fuse count on player
-               player.SetHasFuse(); 
+               player.SetHasFuse(true); 
                Debug.Log("Fuse picked up!");
 
                // Destroy fuse and disable UI pop up 
@@ -62,6 +69,7 @@ public class Fuse : MonoBehaviour
                // Reset check for player collision and disable UI pop up 
                isPlayerInRange = false;
                itemUI.SetActive(false);
+               uiText.text = "Pick up fuse";
                Debug.Log("Player out of range.");
          }
       }
