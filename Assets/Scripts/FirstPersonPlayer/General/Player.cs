@@ -1,3 +1,4 @@
+// Avalon Brathwaite 
 // Handles collisions with player, inventory of bricks and collecting fuses
 
 using System;
@@ -8,6 +9,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Boolean hasFuse; 
+    public int brickCount; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +22,38 @@ public class Player : MonoBehaviour
     {
         
     }
+
+    // Increment amount of bricks a player has 
+    public void IncrementBrickCount(int num){
+        brickCount++; 
+    }
+
+    // Decrement amount of bricks a player has  
+    public void DecrementBrickCount(){
+        brickCount--; 
+    }
+
+    // Throw a brick 
+    public void ThrowBrick(){
+        // Check if player has bricks 
+        if(brickCount == 0){
+            return; 
+        }
+    }
+
+    // Player has picked up a fuse
+    public void SetHasFuse(){
+        hasFuse = true; 
+        Debug.Log("Fuse is now: " + hasFuse);
+    }
+
+    // Player has placed a fuse 
+    public void UnsetHasFuse(){
+        hasFuse = false; 
+    }
 }
+
+
 
 // For fuses - 
 /*

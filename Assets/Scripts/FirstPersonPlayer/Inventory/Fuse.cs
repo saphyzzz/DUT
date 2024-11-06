@@ -1,46 +1,44 @@
 // Avalon Brathwaite 
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Brick : MonoBehaviour
+public class Fuse : MonoBehaviour
 {
-   public Player player;
-   private bool isPlayerInRange;
-   public GameObject itemUI;
-   public Text uiText;  
 
+    public Player player; 
+    private bool isPlayerInRange;
+    public GameObject itemUI; 
+    public Text uiText; 
 
-   void Start()
-   {
-      player = FindObjectOfType<Player>();
-   }
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
 
-
+   
    void Update()
       {
          // Check if the player is in range and has pressed "E"
          if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
          {
-            if(player.brickCount != 2)
-            {
-               uiText.text = "Pick up brick";
-                // Increment brick count on player
-               player.IncrementBrickCount(1); 
-               Debug.Log("Brick picked up!");
+            if(player.hasFuse == false){
+               uiText.text = "Pick up fuse";
+               // Increment fuse count on player
+               player.SetHasFuse(); 
+               Debug.Log("Fuse picked up!");
 
-               // Destroy brick and disable UI pop up 
+               // Destroy fuse and disable UI pop up 
                Destroy(gameObject); 
                itemUI.SetActive(false);
             }
-
             else{
-               uiText.text = "Already have"; 
-               Debug.Log("Player has two bricks");
+                uiText.text = "Already have";
+                Debug.Log("Player has fuse");
             }
-   
          }
       }
 
@@ -52,7 +50,7 @@ public class Brick : MonoBehaviour
                // Set check for player collision and enable UI pop up 
                isPlayerInRange = true;
                itemUI.SetActive(true);
-               Debug.Log("Player in range. Press 'E' to pick up brick.");
+               Debug.Log("Player in range. Press 'E' to pick up fuse.");
                
          }
       }
@@ -68,5 +66,3 @@ public class Brick : MonoBehaviour
          }
       }
 }
-
-
