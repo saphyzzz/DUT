@@ -954,6 +954,7 @@ GameObject:
   - component: {fileID: 320597676}
   - component: {fileID: 320597678}
   - component: {fileID: 320597679}
+  - component: {fileID: 320597680}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1044,6 +1045,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasFuse: 0
   brickCount: 0
+--- !u!114 &320597680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320597675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c312060ec63ae204ea66e9d0a635a677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brick: {fileID: 4374202059280352993, guid: 3e9f7280d4f66544d94123c5415c2bfc, type: 3}
 --- !u!1 &320638932
 GameObject:
   m_ObjectHideFlags: 0
