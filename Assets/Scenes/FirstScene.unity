@@ -1058,6 +1058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brick: {fileID: 4374202059280352993, guid: 3e9f7280d4f66544d94123c5415c2bfc, type: 3}
+  orientation: {fileID: 1854625739}
 --- !u!1 &320638932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,7 +1297,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.85}
   m_AnchorMax: {x: 0.5, y: 0.85}
-  m_AnchoredPosition: {x: 6.142101, y: 0.000061035156}
+  m_AnchoredPosition: {x: 6.142101, y: 0}
   m_SizeDelta: {x: 91.2705, y: 97.8254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &386854045
