@@ -131,7 +131,7 @@ public class MainMenuController : MonoBehaviour
     // Play game 
     public void Play()
     {
-        SceneManager.LoadScene("FirstScene");
+        SceneManager.LoadScene("CinematicScene");
     }
 
 }
