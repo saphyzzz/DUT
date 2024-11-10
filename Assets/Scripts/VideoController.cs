@@ -44,7 +44,7 @@ public class VideoController : MonoBehaviour
     }
 
     //szymon fijalkowski
-    //Coroutine to show text prompt on screen and enable skipping for 3 seconds and then hide and disable it
+    //Coroutine to show text prompt on screen and in turn enable skipping for 3 seconds and then hide and disable it
     //this creates a two input confirmation process to ensure that the player wants to skip
     private IEnumerator EnableSkip()
     {

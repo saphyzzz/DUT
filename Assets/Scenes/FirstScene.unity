@@ -955,7 +955,7 @@ GameObject:
   - component: {fileID: 320597678}
   - component: {fileID: 320597679}
   - component: {fileID: 320597680}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1059,6 +1059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brick: {fileID: 4374202059280352993, guid: 3e9f7280d4f66544d94123c5415c2bfc, type: 3}
   orientation: {fileID: 1854625739}
+  player: {fileID: 320597679}
 --- !u!1 &320638932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,7 +1498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 548867266}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CameraPos
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -3822,7 +3823,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1854625740}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4009,7 +4010,7 @@ GameObject:
   - component: {fileID: 1946741596}
   - component: {fileID: 1946741597}
   - component: {fileID: 1946741598}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
