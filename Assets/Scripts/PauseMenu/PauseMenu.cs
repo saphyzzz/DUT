@@ -15,7 +15,6 @@ public class PauseMenu : MonoBehaviour
     // UI
     public GameObject pauseMenuUI; 
     public GameObject pixelRenderUI;
-    public GameObject itemUI;
 
     void Start()
     {

@@ -14,12 +14,18 @@ public class Fuse : MonoBehaviour
     public Text uiText; 
     public GameManager gameManager; 
 
+    // Track colours of Fuses
+    public enum FuseColour{PINK,BLUE,GREEN,YELLOW,ORANGE}
+    public FuseColour fuseColour; 
+
+
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
         
         gameManager = FindObjectOfType<GameManager>();
+
     }
 
    
