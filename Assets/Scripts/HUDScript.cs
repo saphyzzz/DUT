@@ -26,13 +26,14 @@ public class HUDScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fuse = FindObjectOfType<Fuse>();
+        fuse = player.currentFuse;
+        //fuse = FindObjectOfType<Fuse>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        fuse = FindObjectOfType<Fuse>();
+         fuse = player.currentFuse;
          // Check if the game is inGame state
         if (gameManager.currentState !=  GameManager.GameState.InGame)
         {
@@ -53,11 +54,8 @@ public class HUDScript : MonoBehaviour
             // Check if a player has a fuse and set it to the correct UI
             if(!player.hasFuse){
                 // Disable Fuse UI if player does not have one 
-                pinkFuse.SetActive(false);
-                blueFuse.SetActive(false);
-                yellowFuse.SetActive(false);
-                orangeFuse.SetActive(false);
-                greenFuse.SetActive(false);   
+                disableFuseUI();
+                
                 // Pick correct Brick UI         
                 PickUi();
             }
@@ -65,67 +63,65 @@ public class HUDScript : MonoBehaviour
                 // Pick correct Brick UI         
                 PickUi();
                 PickFuseUI();
+                // After setting the UI, delete the fuse object
+                if (fuse!= null)
+                {
+                    Destroy(fuse.gameObject);
+                    fuse = null;  // Reset the reference after deletion
+                }
             }
         }
     }
 
     // Picks which UI to use 
     public void PickUi(){
+        brick1UI.SetActive(false);
+        brick2UI.SetActive(false);
+        defaultHudUI.SetActive(false);
+
         if(player.brickCount == 1){
             brick1UI.SetActive(true);
-            brick2UI.SetActive(false);
-            defaultHudUI.SetActive(false);
         }
         else if(player.brickCount == 2){
             brick2UI.SetActive(true);
-            brick1UI.SetActive(false);
-            defaultHudUI.SetActive(false);
         }
         else if(player.brickCount <= 0){
             defaultHudUI.SetActive(true);
-            brick2UI.SetActive(false);
-            brick1UI.SetActive(false);
         }
     }
 
-    // Pick Ui for fuse 
     public void PickFuseUI(){
-        if(fuse.fuseColour==Fuse.FuseColour.PINK){
-            pinkFuse.SetActive(true);
-            blueFuse.SetActive(false);
-            yellowFuse.SetActive(false);
-            orangeFuse.SetActive(false);
-            greenFuse.SetActive(false);   
-        }
-        if(fuse.fuseColour==Fuse.FuseColour.BLUE){
-            blueFuse.SetActive(true);
-            pinkFuse.SetActive(false);
-            yellowFuse.SetActive(false);
-            orangeFuse.SetActive(false);
-            greenFuse.SetActive(false);   
-        }
-        if(fuse.fuseColour==Fuse.FuseColour.ORANGE){
-            orangeFuse.SetActive(true);
-            pinkFuse.SetActive(false);
-            blueFuse.SetActive(false);
-            yellowFuse.SetActive(false);
-            greenFuse.SetActive(false);   
-        }
-        if(fuse.fuseColour==Fuse.FuseColour.YELLOW){
-            yellowFuse.SetActive(true);
-            pinkFuse.SetActive(false);
-            blueFuse.SetActive(false);
-            orangeFuse.SetActive(false);
-            greenFuse.SetActive(false);   
-        }
-        if(fuse.fuseColour==Fuse.FuseColour.GREEN){
-            greenFuse.SetActive(true);   
-            pinkFuse.SetActive(false);
-            blueFuse.SetActive(false);
-            yellowFuse.SetActive(false);
-            orangeFuse.SetActive(false); 
-        }
+        // Disable all fuse UI icons first
+        disableFuseUI();
 
-
+        // Enable only the correct fuse based on the colour
+        switch (fuse.fuseColour)
+        {
+            case Fuse.FuseColour.PINK:
+                pinkFuse.SetActive(true);
+                break;
+            case Fuse.FuseColour.BLUE:
+                blueFuse.SetActive(true);
+                break;
+            case Fuse.FuseColour.ORANGE:
+                orangeFuse.SetActive(true);
+                break;
+            case Fuse.FuseColour.YELLOW:
+                yellowFuse.SetActive(true);
+                break;
+            case Fuse.FuseColour.GREEN:
+                greenFuse.SetActive(true);
+                break;
+        }
     }
+
+    // Disables fuse UI 
+    public void disableFuseUI(){
+        pinkFuse.SetActive(false);
+        blueFuse.SetActive(false);
+        orangeFuse.SetActive(false);
+        greenFuse.SetActive(false);
+        yellowFuse.SetActive(false);
+    }
+
 }

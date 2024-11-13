@@ -42,15 +42,13 @@ public class Fuse : MonoBehaviour
                uiText.text = "Pick up fuse";
                // Increment fuse count on player
                player.SetHasFuse(true); 
-               Debug.Log("Fuse picked up!");
+               player.currentFuse = this;
 
-               // Destroy fuse and disable UI pop up 
-               Destroy(gameObject); 
+               // Disable UI pop up 
                itemUI.SetActive(false);
             }
             else{
                 uiText.text = "Already have";
-                Debug.Log("Player has fuse");
             }
          }
       }
@@ -63,7 +61,6 @@ public class Fuse : MonoBehaviour
                // Set check for player collision and enable UI pop up 
                isPlayerInRange = true;
                itemUI.SetActive(true);
-               Debug.Log("Player in range. Press 'E' to pick up fuse.");
                
          }
       }
@@ -75,8 +72,6 @@ public class Fuse : MonoBehaviour
                // Reset check for player collision and disable UI pop up 
                isPlayerInRange = false;
                itemUI.SetActive(false);
-               uiText.text = "Pick up fuse";
-               Debug.Log("Player out of range.");
          }
       }
 }

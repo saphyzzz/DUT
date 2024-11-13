@@ -45,11 +45,11 @@ public class GameManager : MonoBehaviour
 
         else if(currentState == GameState.WinScreen){
             winUI.SetActive(true);
+            Time.timeScale = 0;
             if (Input.GetKeyDown(KeyCode.Escape)){
                 SceneManager.LoadScene("MainMenu");
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                Debug.Log("Loading Menu");
                 Time.timeScale = 1; 
             }
         }

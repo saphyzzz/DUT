@@ -9,7 +9,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Boolean hasFuse; 
-    public int brickCount; 
+    public int brickCount;
+
+    public Fuse currentFuse { get; internal set; }
 
     // Update is called once per frame
     void Update()
@@ -38,6 +40,5 @@ public class Player : MonoBehaviour
     // Player has picked up a fuse
     public void SetHasFuse(bool fuse){
         hasFuse = fuse; 
-        Debug.Log("Fuse is now: " + hasFuse);
     }
 }

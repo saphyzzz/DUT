@@ -17,8 +17,7 @@ public class FuseBpx : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         player = FindObjectOfType<Player>();
-         gameManager = FindAnyObjectByType<GameManager>();
+      fuseCount = 0; 
     }
 
     // Update is called once per frame
@@ -30,7 +29,7 @@ public class FuseBpx : MonoBehaviour
       }
 
       // If player has four fuses switch to win state
-      if(fuseCount == 4){
+      if(fuseCount == 5){
          gameManager.currentState = GameManager.GameState.WinScreen;
       }
 
@@ -43,6 +42,8 @@ public class FuseBpx : MonoBehaviour
                   // Reset fuse
                   player.SetHasFuse(false); 
                   Debug.Log("Fuse Placed");
+                  Debug.Log("Fuse count (in Update): " + fuseCount);
+
 
                   // Increment counter
                   fuseCount++; 
