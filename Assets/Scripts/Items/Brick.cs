@@ -44,10 +44,10 @@ public class Brick : MonoBehaviour
                   player.IncrementBrickCount(1);
                   source.PlayOneShot(clip);
                   // Destroy brick and disable UI pop up 
-                  // Destroy(gameObject); 
+                  Destroy(gameObject); 
                   
                   // Start the Coroutine to handle audio and destruction
-                  StartCoroutine(PickupBrick());
+                  // StartCoroutine(PickupBrick());
 
                   itemUI.SetActive(false);
                }

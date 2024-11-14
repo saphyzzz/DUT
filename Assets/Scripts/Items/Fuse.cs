@@ -45,8 +45,8 @@ public class Fuse : MonoBehaviour
             if(player.hasFuse == false){
                uiText.text = "Pick up fuse";
                // Play the audio
-               // source.PlayOneShot(clip);
-               // Increment fuse count on player
+                source.PlayOneShot(clip);       
+               // // Increment fuse count on player
                player.SetHasFuse(true); 
                player.currentFuse = this;
 
@@ -59,15 +59,6 @@ public class Fuse : MonoBehaviour
             }
          }
       }
-
-      private IEnumerator PlaySoundAndDestroy()
-{
-    // Play the pickup sound
-    source.PlayOneShot(clip);
-
-    // Wait for the audio clip to finish
-    yield return new WaitForSeconds(clip.length);
-}
 
 
       // Check for collisions 

@@ -14,6 +14,12 @@ public class FuseBpx : MonoBehaviour
     public int fuseCount;
     public GameManager gameManager; 
 
+    // Handle audio 
+   public AudioSource source; 
+   public AudioClip fuseClip;
+   public AudioClip winClip;
+   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +37,7 @@ public class FuseBpx : MonoBehaviour
       // If player has four fuses switch to win state
       if(fuseCount == 5){
          gameManager.currentState = GameManager.GameState.WinScreen;
+         source.PlayOneShot(winClip);
       }
 
       else{
@@ -41,20 +48,16 @@ public class FuseBpx : MonoBehaviour
                   uiText.text = "Place Fuse";
                   // Reset fuse
                   player.SetHasFuse(false); 
-                  Debug.Log("Fuse Placed");
-                  Debug.Log("Fuse count (in Update): " + fuseCount);
-
 
                   // Increment counter
                   fuseCount++; 
-                  Debug.Log("Fuse count: " + fuseCount);
 
-                  // Disable UI pop up
+                  // Disable UI pop up and play audio 
+                  source.PlayOneShot(fuseClip);
                   fuseboxUI.SetActive(false);
                }
                else{
                   uiText.text = "  No fuse";
-                  Debug.Log("Player has no fuse");
                }
             }
       }
@@ -68,7 +71,6 @@ public class FuseBpx : MonoBehaviour
                // Set check for player collision and enable UI pop up 
                isPlayerInRange = true;
                fuseboxUI.SetActive(true);
-               Debug.Log("Player in range. Press 'E' to place up fuse.");
                
          }
       }
@@ -80,7 +82,6 @@ public class FuseBpx : MonoBehaviour
                // Reset check for player collision and disable UI pop up 
                isPlayerInRange = false;
                fuseboxUI.SetActive(false);
-               Debug.Log("Player out of range.");
                uiText.text = "Place Fuse";
          }
       }
