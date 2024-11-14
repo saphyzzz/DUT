@@ -18,6 +18,10 @@ public class Fuse : MonoBehaviour
     public enum FuseColour{PINK,BLUE,GREEN,YELLOW,ORANGE}
     public FuseColour fuseColour; 
 
+    // Handle audio
+   public AudioSource source; 
+   public AudioClip clip;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +44,12 @@ public class Fuse : MonoBehaviour
          {
             if(player.hasFuse == false){
                uiText.text = "Pick up fuse";
+               // Play the audio
+               // source.PlayOneShot(clip);
                // Increment fuse count on player
                player.SetHasFuse(true); 
                player.currentFuse = this;
+
 
                // Disable UI pop up 
                itemUI.SetActive(false);
@@ -52,6 +59,16 @@ public class Fuse : MonoBehaviour
             }
          }
       }
+
+      private IEnumerator PlaySoundAndDestroy()
+{
+    // Play the pickup sound
+    source.PlayOneShot(clip);
+
+    // Wait for the audio clip to finish
+    yield return new WaitForSeconds(clip.length);
+}
+
 
       // Check for collisions 
       private void OnTriggerEnter(Collider other)

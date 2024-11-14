@@ -13,6 +13,12 @@ public class Brick : MonoBehaviour
    public Text uiText;  
    public GameManager gameManager;
 
+   // Handle audio
+   public AudioSource source; 
+   public AudioClip clip;
+
+
+
 
    void Start()
    {
@@ -35,21 +41,36 @@ public class Brick : MonoBehaviour
                {
                   uiText.text = "Pick up brick";
                   // Increment brick count on player
-                  player.IncrementBrickCount(1); 
-                  Debug.Log("Brick picked up!");
-
+                  player.IncrementBrickCount(1);
+                  source.PlayOneShot(clip);
                   // Destroy brick and disable UI pop up 
-                  Destroy(gameObject); 
+                  // Destroy(gameObject); 
+                  
+                  // Start the Coroutine to handle audio and destruction
+                  StartCoroutine(PickupBrick());
+
                   itemUI.SetActive(false);
                }
 
                else{
                   uiText.text = "Already have"; 
-                  Debug.Log("Player has two bricks");
                }
             }
          }
       }
+
+   private IEnumerator PickupBrick(){
+      // Play the audio
+      source.PlayOneShot(clip);
+
+      // Wait for the length of the audio clip
+      yield return new WaitForSeconds(clip.length);
+
+      // Destroy the brick after the audio has played
+      Destroy(gameObject);
+   }
+      
+
 
       // Check for collisions 
       private void OnTriggerEnter(Collider other)
@@ -59,7 +80,6 @@ public class Brick : MonoBehaviour
                // Set check for player collision and enable UI pop up 
                isPlayerInRange = true;
                itemUI.SetActive(true);
-               Debug.Log("Player in range. Press 'E' to pick up brick.");
                
          }
       }
@@ -72,7 +92,6 @@ public class Brick : MonoBehaviour
                isPlayerInRange = false;
                itemUI.SetActive(false);
                uiText.text = "Pick up brick";
-               Debug.Log("Player out of range.");
          }
       }
 }

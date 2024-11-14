@@ -66,12 +66,30 @@ public class HUDScript : MonoBehaviour
                 // After setting the UI, delete the fuse object
                 if (fuse!= null)
                 {
-                    Destroy(fuse.gameObject);
+                    StartCoroutine(PlaySoundAndDestroyFuse(fuse));
+                    // Destroy(fuse.gameObject);
                     fuse = null;  // Reset the reference after deletion
                 }
             }
         }
     }
+    IEnumerator PlaySoundAndDestroyFuse(Fuse fuse)
+{
+    if (fuse != null)
+    {
+         // Set volume if it isn't respecting the inspector value
+        fuse.source.volume = 0.6f; 
+
+        // Play the sound
+        fuse.source.PlayOneShot(fuse.clip);
+
+        // Wait for the clip to finish playing
+        yield return new WaitForSeconds(fuse.clip.length);
+
+        // Destroy the fuse GameObject
+        Destroy(fuse.gameObject);
+    }
+}
 
     // Picks which UI to use 
     public void PickUi(){
