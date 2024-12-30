@@ -11,7 +11,7 @@ public class ThrowingBrick : MonoBehaviour
         int random_y = Random.Range(-100, 100);
         int random_z = Random.Range(-100, 100);
         GetComponent<Rigidbody>().AddForce(transform.forward * 8, ForceMode.Impulse);
-        GetComponent<Rigidbody>().AddForce(transform.up * 3, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(transform.up * 5, ForceMode.Impulse);
         GetComponent<Rigidbody>().AddTorque(new Vector3(random_x,random_y,random_z));
         StartCoroutine(DeathTimer());
     }

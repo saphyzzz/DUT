@@ -1,3 +1,4 @@
+//Szymon Fijalkowski
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,12 +10,16 @@ public class EnemyScreenManager : MonoBehaviour
 
     public Material defaultFace;
     public Material redFace;
+    public Material offFace;
+    public GameObject screen;
     private float faceFlash;
+    private bool isOff;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(RedFaceHandler());
+        isOff = false;
     }
 
     // Update is called once per frame
@@ -29,11 +34,11 @@ public class EnemyScreenManager : MonoBehaviour
         {
             if (i == 0)
             {
-                GetComponent<MeshRenderer>().material = redFace;
+                screen.GetComponent<MeshRenderer>().material = redFace;
             }
             else
             {
-                GetComponent<MeshRenderer>().material = defaultFace;
+                screen.GetComponent<MeshRenderer>().material = defaultFace;
             }
             yield return new WaitForSeconds(0.1f);
         }
@@ -44,8 +49,37 @@ public class EnemyScreenManager : MonoBehaviour
         while (true)
         {
             faceFlash = UnityEngine.Random.Range(0.1f, 2.0f);
-            StartCoroutine(FlashRedFace());
+            if (!isOff)
+            {
+                StartCoroutine(FlashRedFace());
+            }
             yield return new WaitForSeconds(faceFlash);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("brick"))
+        {
+            StartCoroutine(TurnOff());
+            isOff=true;
+        }
+    }
+
+    private IEnumerator TurnOff()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (i == 0)
+            {
+                screen.GetComponent<MeshRenderer>().material = offFace;
+            }
+            else
+            {
+                screen.GetComponent<MeshRenderer>().material = defaultFace;
+                isOff=false;
+            }
+            yield return new WaitForSeconds(5f);
         }
     }
 }
