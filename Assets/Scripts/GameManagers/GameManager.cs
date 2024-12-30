@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameState currentState = GameState.InGame; 
 
     public GameObject winUI;
+    public GameObject defeatUI;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,16 @@ public class GameManager : MonoBehaviour
 
         else if(currentState == GameState.WinScreen){
             winUI.SetActive(true);
+            Time.timeScale = 0;
+            if (Input.GetKeyDown(KeyCode.Escape)){
+                SceneManager.LoadScene("MainMenu");
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 1; 
+            }
+        }
+        else if(currentState == GameState.DefeatScreen){
+            defeatUI.SetActive(true);
             Time.timeScale = 0;
             if (Input.GetKeyDown(KeyCode.Escape)){
                 SceneManager.LoadScene("MainMenu");

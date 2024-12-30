@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class VideoController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
+    public GameObject cinematic;
     public GameObject skipText;
     int time;
 
@@ -23,11 +24,7 @@ public class VideoController : MonoBehaviour
         //if E is pressed when the text is being displayed, load the main level
         if(Input.GetKeyDown(KeyCode.E) && skipText.activeSelf){
             SceneManager.LoadScene("FirstScene");
-            //  foreach (GameObject rootObj in gameObject.scene.GetRootGameObjects())
-            // {
-            //     rootObj.SetActive(false); // Disable all objects in the scene
-            // }
-            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+            SceneManager.UnloadSceneAsync("CinematicScene");
         }
 
         //if any key is pressed and the text isn't on screen start the coroutine
