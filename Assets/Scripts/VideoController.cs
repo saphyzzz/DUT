@@ -23,6 +23,11 @@ public class VideoController : MonoBehaviour
         //if E is pressed when the text is being displayed, load the main level
         if(Input.GetKeyDown(KeyCode.E) && skipText.activeSelf){
             SceneManager.LoadScene("FirstScene");
+            //  foreach (GameObject rootObj in gameObject.scene.GetRootGameObjects())
+            // {
+            //     rootObj.SetActive(false); // Disable all objects in the scene
+            // }
+            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
         }
 
         //if any key is pressed and the text isn't on screen start the coroutine
@@ -38,7 +43,7 @@ public class VideoController : MonoBehaviour
             if (i == 1)
             {
                 SceneManager.LoadScene("FirstScene");
-            }
+                SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);            }
             yield return new WaitForSeconds(70f);
         }
     }
