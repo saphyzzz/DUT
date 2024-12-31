@@ -19,13 +19,14 @@ public class WalkingAnimation : MonoBehaviour
     void Update()
     {
         transform.position = currentPosition;
+        transform.rotation = body.transform.rotation;
 
-        Ray ray = new Ray(body.transform.position + (body.transform.right * stepWidth), Vector3.down);
+        Ray ray = new Ray(body.transform.position + (body.transform.right * stepWidth) + (body.transform.forward * footoffset), Vector3.down);
         if (Physics.Raycast(ray,out RaycastHit hitInfo))
         {
             if (Vector3.Distance(currentPosition, hitInfo.point) > maxDistance)
             {
-                currentPosition = hitInfo.point + (transform.forward);
+                currentPosition = hitInfo.point;
             }
         }
     }
