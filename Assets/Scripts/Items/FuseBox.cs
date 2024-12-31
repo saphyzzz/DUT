@@ -11,6 +11,7 @@ public class FuseBpx : MonoBehaviour
     private bool isPlayerInRange;
     public GameObject fuseboxUI; 
     public Text uiText; 
+    public Text uiFuseText; 
     public int fuseCount;
     public GameManager gameManager; 
 
@@ -57,7 +58,7 @@ public class FuseBpx : MonoBehaviour
                   fuseboxUI.SetActive(false);
                }
                else{
-                  uiText.text = "  No fuse";
+                  uiText.text = "No Fuse";
                }
             }
       }
@@ -69,6 +70,7 @@ public class FuseBpx : MonoBehaviour
          if(other.gameObject.name.Contains("Player"))
          {
                // Set check for player collision and enable UI pop up 
+               uiFuseText.text = fuseCount +"/5";
                isPlayerInRange = true;
                fuseboxUI.SetActive(true);
                
