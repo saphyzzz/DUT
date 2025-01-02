@@ -39,8 +39,8 @@ public class VideoController : MonoBehaviour
         {
             if (i == 1)
             {
-                SceneManager.LoadScene("FirstScene");
-                SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);            }
+               SceneManager.LoadScene("FirstScene");
+               SceneManager.UnloadSceneAsync("CinematicScene");        }
             yield return new WaitForSeconds(70f);
         }
     }
