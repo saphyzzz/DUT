@@ -13,7 +13,10 @@ public class DeathScreenAnimation : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Laugh());
+       StartCoroutine(Laugh());
+    }
+    void Update(){
+
     }
 
     private IEnumerator Laugh()
