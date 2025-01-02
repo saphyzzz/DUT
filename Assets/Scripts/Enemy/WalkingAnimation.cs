@@ -19,14 +19,12 @@ public class WalkingAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = currentPosition;
-
         Ray ray = new Ray(body.transform.position + (body.transform.right * stepWidth) + (body.transform.forward * footoffset), Vector3.down);
         if (Physics.Raycast(ray,out RaycastHit hitInfo))
         {
-            if (Vector3.Distance(currentPosition, hitInfo.point) > maxDistance)
+            if (Vector3.Distance(transform.position, hitInfo.point) > maxDistance)
             {
-                currentPosition = hitInfo.point;
+                transform.position = hitInfo.point;
             }
         }
     }
