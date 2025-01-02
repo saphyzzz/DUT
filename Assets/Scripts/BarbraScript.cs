@@ -10,7 +10,7 @@ public class TestTrigger : MonoBehaviour
     public GameObject defeatScreenUI;
     public GameManager gameManager; 
     public AudioSource source; 
-    public AudioClip fuseClip;
+    public AudioClip defeatClip;
 
 
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class TestTrigger : MonoBehaviour
          if(collision.gameObject.name.Contains("Player"))
          { 
             gameManager.currentState = GameManager.GameState.DefeatScreen;
-               
+            source.PlayOneShot(defeatClip);
          }
       }
 }
