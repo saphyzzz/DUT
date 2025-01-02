@@ -11,6 +11,7 @@ public class TestTrigger : MonoBehaviour
     public GameManager gameManager; 
     public AudioSource source; 
     public AudioClip defeatClip;
+    public AudioSource inGameSource;
 
 
     // Start is called before the first frame update
@@ -31,6 +32,7 @@ public class TestTrigger : MonoBehaviour
          { 
             gameManager.currentState = GameManager.GameState.DefeatScreen;
             source.PlayOneShot(defeatClip);
+            inGameSource.Stop(); 
          }
       }
 }

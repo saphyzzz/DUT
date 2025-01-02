@@ -35,13 +35,13 @@ public class FuseBpx : MonoBehaviour
     {
       if(gameManager.currentState != GameManager.GameState.InGame){
          fuseboxUI.SetActive(false);
-         backgroundSource.Stop();
          return;
       }
 
       // If player has four fuses switch to win state
       if(fuseCount == 5){
          gameManager.currentState = GameManager.GameState.WinScreen;
+         backgroundSource.Stop();
          source.PlayOneShot(winClip);
       }
 
