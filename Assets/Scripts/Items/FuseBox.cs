@@ -42,7 +42,7 @@ public class FuseBpx : MonoBehaviour
       if(fuseCount == 5){
          gameManager.currentState = GameManager.GameState.WinScreen;
          backgroundSource.Stop();
-         source.PlayOneShot(winClip);
+         source.Play();
       }
 
       else{
