@@ -8,10 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class VideoController : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;
-    public GameObject cinematic;
     public GameObject skipText;
-    int time;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +20,7 @@ public class VideoController : MonoBehaviour
 
         //if E is pressed when the text is being displayed, load the main level
         if(Input.GetKeyDown(KeyCode.E) && skipText.activeSelf){
-            SceneManager.LoadScene("FirstScene");
+            SceneManager.LoadSceneAsync("FirstScene");
             SceneManager.UnloadSceneAsync("CinematicScene");
         }
 
@@ -39,12 +36,13 @@ public class VideoController : MonoBehaviour
         {
             if (i == 1)
             {
-               SceneManager.LoadScene("FirstScene");
-               SceneManager.UnloadSceneAsync("CinematicScene");        }
+               SceneManager.LoadSceneAsync("FirstScene");
+               SceneManager.UnloadSceneAsync("CinematicScene");     
+            }
             yield return new WaitForSeconds(70f);
         }
     }
-
+   
     //szymon fijalkowski
     //Coroutine to show text prompt on screen and in turn enable skipping for 3 seconds and then hide and disable it
     //this creates a two input confirmation process to ensure that the player wants to skip
