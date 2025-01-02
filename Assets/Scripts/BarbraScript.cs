@@ -13,12 +13,12 @@ public class TestTrigger : MonoBehaviour
     public GameObject defeatScreenUI;
     public GameManager gameManager; 
     public AudioSource source; 
-    public AudioClip defeatClip;
     public AudioSource inGameSource;
     public GameObject panel;
     public Sprite mouthClosed;
     public Sprite mouthOpen;
     private bool isOpen;
+    
 
 
     // Start is called before the first frame update

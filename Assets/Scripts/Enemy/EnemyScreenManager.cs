@@ -1,6 +1,7 @@
 //Szymon Fijalkowski
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,6 +14,8 @@ public class EnemyScreenManager : MonoBehaviour
     public Material offFace;
     public GameObject screen;
     private float faceFlash;
+    public AudioClip hitClip;
+    public AudioSource source; 
     private bool isOff;
 
     // Start is called before the first frame update
@@ -61,6 +64,7 @@ public class EnemyScreenManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("brick"))
         {
+            source.PlayOneShot(hitClip);
             StartCoroutine(TurnOff());
             isOff=true;
         }
