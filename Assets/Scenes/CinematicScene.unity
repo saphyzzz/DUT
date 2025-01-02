@@ -422,9 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6f28747cebe4da3aeb36f830e915ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoPlayer: {fileID: 1639656336}
   skipText: {fileID: 348761966}
-  firstCanvas: {fileID: 0}
 --- !u!1 &2123942427
 GameObject:
   m_ObjectHideFlags: 0

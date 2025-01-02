@@ -31,7 +31,7 @@ public class TestTrigger : MonoBehaviour
          if(collision.gameObject.name.Contains("Player"))
          { 
             gameManager.currentState = GameManager.GameState.DefeatScreen;
-            source.PlayOneShot(defeatClip);
+            source.Play();
             inGameSource.Stop(); 
          }
       }
