@@ -11,6 +11,9 @@ public class BrickThrowScript : MonoBehaviour
     private GameObject newBrick;
     public GameManager gameManager;  
     public Player player;
+    public AudioSource source; 
+    public AudioClip throwClip;
+
 
     // Update is called once per frame
     void Update()

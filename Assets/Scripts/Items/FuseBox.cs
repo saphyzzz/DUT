@@ -26,7 +26,7 @@ public class FuseBpx : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      backgroundSource.PlayOneShot(inGameClip);
+      backgroundSource.Play();
       fuseCount = 0; 
     }
 
