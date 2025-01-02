@@ -11,12 +11,13 @@ public class DeathScreenAnimation : MonoBehaviour
     public Sprite mouthOpen;
     private bool isOpen;
 
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-       StartCoroutine(Laugh());
-    }
-    void Update(){
-
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(Laugh());
+        }
+        StartCoroutine(Laugh());
     }
 
     private IEnumerator Laugh()
