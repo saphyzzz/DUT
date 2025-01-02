@@ -23,6 +23,7 @@ public class BrickThrowScript : MonoBehaviour
             newBrick = Instantiate(brick, new Vector3 (orientation.transform.position.x, (orientation.transform.position.y)-0.5f, orientation.transform.position.z), orientation.transform.rotation);
             newBrick.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
             player.brickCount--;
+            source.PlayOneShot(throwClip);
         }
     }
 }
