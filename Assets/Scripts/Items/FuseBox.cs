@@ -17,13 +17,16 @@ public class FuseBpx : MonoBehaviour
 
     // Handle audio 
    public AudioSource source; 
+   public AudioSource backgroundSource; 
    public AudioClip fuseClip;
    public AudioClip winClip;
+   public AudioClip inGameClip;
    
 
     // Start is called before the first frame update
     void Start()
     {
+      backgroundSource.PlayOneShot(inGameClip);
       fuseCount = 0; 
     }
 
@@ -32,6 +35,7 @@ public class FuseBpx : MonoBehaviour
     {
       if(gameManager.currentState != GameManager.GameState.InGame){
          fuseboxUI.SetActive(false);
+         backgroundSource.Stop();
          return;
       }
 
