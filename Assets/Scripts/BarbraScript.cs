@@ -12,8 +12,8 @@ public class TestTrigger : MonoBehaviour
     public Player player; 
     public GameObject defeatScreenUI;
     public GameManager gameManager; 
-    public AudioSource source; 
     public AudioSource inGameSource;
+    public AudioSource defeatSource;
     public GameObject panel;
     public Sprite mouthClosed;
     public Sprite mouthOpen;
@@ -39,7 +39,7 @@ public class TestTrigger : MonoBehaviour
          { 
             gameManager.currentState = GameManager.GameState.DefeatScreen;
             StartCoroutine(Laugh());
-            source.Play();
+            defeatSource.Play();
             inGameSource.Stop();
          }
       }
