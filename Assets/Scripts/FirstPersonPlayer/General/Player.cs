@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
         brickCount--; 
     }
 
+    //Szymon Fijalkowski
     // Throw a brick 
     public void ThrowBrick(){
         // Check if player has bricks 
