@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FuseBpx : MonoBehaviour
+public class FuseBox: MonoBehaviour
 {
     public Player player; 
     private bool isPlayerInRange;
