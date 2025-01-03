@@ -16,7 +16,7 @@ public class EnemyScreenManager : MonoBehaviour
     private float faceFlash;
     public AudioClip hitClip;
     public AudioSource source; 
-    private bool isOff;
+    public bool isOff;
 
     // Start is called before the first frame update
     void Start()
@@ -62,8 +62,9 @@ public class EnemyScreenManager : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("brick"))
+        if (collision.gameObject.CompareTag("brick") && !isOff)
         {
+
             source.PlayOneShot(hitClip);
             StartCoroutine(TurnOff());
             isOff=true;
