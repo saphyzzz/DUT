@@ -17,6 +17,14 @@ public class ChaseBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (barbra.isOff)
+        {
+            agent.speed = 0f;
+        }
+        else
+        {
+            agent.speed = 3.5f;
+        }
         agent.destination = player.position;
     }
 }

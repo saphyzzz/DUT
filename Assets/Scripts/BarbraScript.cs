@@ -10,7 +10,8 @@ public class TestTrigger : MonoBehaviour
 {
     public Player player; 
     public GameObject defeatScreenUI;
-    public GameManager gameManager; 
+    public GameManager gameManager;
+    public EnemyScreenManager enemyScreenManager;
     public AudioSource inGameSource;
     public AudioSource defeatSource;
     public GameObject panel;
@@ -35,7 +36,7 @@ public class TestTrigger : MonoBehaviour
     // Check for collisions 
       private void OnCollisionEnter(Collision collision)
       {
-         if(collision.gameObject.name.Contains("Player"))
+         if(collision.gameObject.name.Contains("Player") && !enemyScreenManager.isOff)
          { 
             gameManager.currentState = GameManager.GameState.DefeatScreen;
             StartCoroutine(Laugh());
