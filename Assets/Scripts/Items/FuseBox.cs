@@ -26,6 +26,7 @@ public class FuseBpx : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+      // Play ambiance and set fuse count to 0 initially 
       backgroundSource.Play();
       fuseCount = 0; 
     }
@@ -38,7 +39,7 @@ public class FuseBpx : MonoBehaviour
          return;
       }
 
-      // If player has four fuses switch to win state
+      // If player has five fuses switch to win state
       if(fuseCount == 5){
          gameManager.currentState = GameManager.GameState.WinScreen;
          backgroundSource.Stop();

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
+    // Handle changes with states and make changes accordingly. 
     void Update()
     {
         if (currentState == GameState.InGame){

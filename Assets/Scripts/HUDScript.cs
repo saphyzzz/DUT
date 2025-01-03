@@ -27,7 +27,6 @@ public class HUDScript : MonoBehaviour
     void Start()
     {
         fuse = player.currentFuse;
-        //fuse = FindObjectOfType<Fuse>();
     }
 
     // Update is called once per frame
@@ -73,7 +72,7 @@ public class HUDScript : MonoBehaviour
         }
     }
 
-    // Picks which UI to use 
+    // Picks which UI to use based on the amount of bricks
     public void PickUi(){
         brick1UI.SetActive(false);
         brick2UI.SetActive(false);

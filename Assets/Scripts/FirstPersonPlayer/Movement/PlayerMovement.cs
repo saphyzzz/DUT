@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
 {
     
     // Handle movement speed
-    [Header("Movement")]
     private float moveSpeed;
     public float groundDrag; 
     Vector3 moveDirection; 
@@ -17,19 +16,15 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed;
 
     // Handle ground speed 
-    [Header("Ground Check")]
     public float playerHeight; 
     public LayerMask whatIsGround; 
     bool grounded; 
     
     // Handle slopes 
-    [Header("Slope Handling")]
     public float maxSlopeAngle; 
     private RaycastHit slopeHit; 
     public float airMultiplier;
 
-
-    [Header("Keybinds")]
     public KeyCode sprintKey = KeyCode.LeftShift; 
     
     // Oritentation of player 
@@ -39,8 +34,6 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput; 
     float verticalInput; 
 
-    // Handle States 
-    public GameManager gameManager;  
     Rigidbody rb; 
 
     public void Start()
@@ -141,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-            /* Limit velocity if needed, if player goes faster than movement speed, calculate what the movement speed 
+            /* Limit velocity, if player goes faster than movement speed, calculate what the movement speed 
             would be then apply it */ 
             if(flatVel.magnitude > moveSpeed){
                 Vector3 limitedVel = flatVel.normalized * moveSpeed; // Returns a new vector in the same direction as flatVel but with a length of 1, 

@@ -16,16 +16,13 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI; 
     public GameObject pixelRenderUI;
 
-    void Start()
-    {
-    }
     // Update is called once per frame
     void Update()
     {
          // Check if the game is in pause menu state
         if (gameManager.currentState !=  GameManager.GameState.PauseMenu)
         {
-            // PUT RESUME HERE IN FUTURE WHEN DEBUG MESSAGE IS GONE
+            // If its not, use the pixel render and disable pause menu
             pixelRenderUI.SetActive(true); 
             pauseMenuUI.SetActive(false); 
             Time.timeScale = 1;
@@ -49,7 +46,6 @@ public class PauseMenu : MonoBehaviour
     // Set state back to InGame
     public void Resume()
     {
-        Debug.Log("Back to in game");
         pixelRenderUI.SetActive(true); 
         pauseMenuUI.SetActive(false); 
         gameManager.currentState = GameManager.GameState.InGame; 
@@ -60,6 +56,5 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         SceneManager.LoadScene("MainMenu");
-        Debug.Log("Loading Menu");
     }
 }

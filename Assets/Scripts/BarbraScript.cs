@@ -1,4 +1,3 @@
-// Avalon Brathwaite
 
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +31,7 @@ public class TestTrigger : MonoBehaviour
     {
     }
 
+    // Avalon Brathwaite
     // Check for collisions 
       private void OnCollisionEnter(Collision collision)
       {
