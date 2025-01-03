@@ -19,7 +19,6 @@ public class FuseBox: MonoBehaviour
    public AudioSource source; 
    public AudioSource backgroundSource; 
    public AudioClip fuseClip;
-   public AudioClip winClip;
    public AudioClip inGameClip;
    
 
