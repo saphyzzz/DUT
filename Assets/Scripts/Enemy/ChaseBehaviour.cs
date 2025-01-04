@@ -6,6 +6,7 @@ public class ChaseBehaviour : MonoBehaviour
 {
     public Transform player;
     public EnemyScreenManager barbra;
+    public FuseBox fuseBox;
     private UnityEngine.AI.NavMeshAgent agent;
 
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class ChaseBehaviour : MonoBehaviour
         }
         else
         {
-            agent.speed = 3.5f;
+            agent.speed = 3.5f + (fuseBox.fuseCount * 1.5f);
         }
         agent.destination = player.position;
     }
